@@ -1,0 +1,268 @@
+/* --- ESTILOS GERAIS --- */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #0056b3;
+    margin-bottom: 30px;
+}
+
+/* --- ESTILOS DO FORMULÁRIO --- */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* --- ESTILOS DA ÁREA DE CARNÊS (VISUALIZAÇÃO EM TELA) --- */
+.carnes-area {
+    margin-top: 40px;
+    border-top: 1px dashed #ccc;
+    padding-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0px; /* Mantém um pequeno espaço na tela para visualização */
+}
+
+.carne-par {
+    display: flex; /* Mantém como flexbox */
+    justify-content: space-between; /* Espaço entre os dois carnês (pagador/recebedor) */
+    width: 100%; /* Ocupa toda a largura disponível na tela */
+    margin-bottom: 0px; /* Espaço entre os pares na tela */
+    flex-wrap: nowrap; /* Garante que os itens não quebrem linha inesperadamente */
+}
+
+/* Estilo para a aba de grampo */
+.carne-aba-grampo {
+    width: 20px; /* Largura fixa da aba */
+    border: 1px solid #000; /* Borda para delimitar a aba */
+    box-sizing: border-box; /* Inclui padding e borda na largura/altura */
+    background-color: #f0f0f0; /* Um tom diferente para destacar a aba na tela */
+    margin-right: 5px; /* Espaço entre a aba e o carnê na tela */
+    flex-shrink: 0; /* Impede que a aba encolha */
+    display: flex; /* Para centralizar texto ou ícone se quiser no futuro */
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7em;
+    color: #666;
+    writing-mode: vertical-rl; /* Para texto vertical, se necessário */
+    text-orientation: mixed;
+    padding: 2px;
+}
+
+.carne-item {
+    border: 1px solid #000;
+    padding: 12px; /* Padding interno do conteúdo */
+    box-sizing: border-box;
+    /* Ajuste na largura: Agora o carne-par precisa acomodar 2 carnês E 2 abas */
+    /* Na tela, vamos manter a largura um pouco flexível */
+    width: calc(50% - 0px); /* (10px gap + 20px aba + 5px margem-aba)/2 */
+    max-width: calc((25cm - 40px) / 2 - 5px); /* 19cm total - 2x 20px abas - espaçamento */
+    min-height: 7.8cm; /* Altura um pouco maior para a aba na tela */
+    page-break-inside: avoid;
+    background-color: #fff;
+    font-size: 0.85em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.carne-item h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 3px;
+    font-size: 1.05em;
+    font-weight: bold;
+}
+
+.carne-item .info-principal {
+    margin-top: 3px;
+    margin-bottom: 1px;
+    text-align: center;
+    /* flex-grow: 1; */ /* Permite que o conteúdo principal ocupe espaço restante */
+}
+.carne-item .info-principal p {
+    margin: 2px;
+ 
+}
+.carne-item .info-principal strong {
+    font-size: 1.05em;
+}
+
+/* Estilo para a informação do PIX */
+.carne-item .info-principal .info-pix {
+    font-size: 0.8em; /* Fonte um pouco menor para o PIX */
+    color: #555;
+    margin-top: 5px; /* Espaço acima da linha do PIX */
+    word-wrap: break-word; /* Garante que o texto longo quebre a linha */
+}
+
+.carne-item .campos-manual {
+    margin-top: 30px; /* Seu ajuste que ficou bom para o espaçamento */
+}
+
+.carne-item .campos-manual p {
+    display: flex;
+    align-items: baseline;
+    margin-top: 30px; 
+    margin-bottom: 7px; /* Espaçamento menor entre os campos */
+}
+
+.carne-item .campos-manual span {
+    flex-shrink: 0;
+    margin-right: 3px;
+    font-weight: bold;
+}
+
+.carne-item .campos-manual .linha {
+    flex-grow: 1; /* Permite que ocupe todo o espaço restante */
+    border-bottom: 1px solid #000;
+    margin-left: 3px;
+}
+
+.carne-item .campos-manual .linha-data {
+    flex-grow: 1; /* Permite que cada um dos 3 spans de data ocupe 1/3 do espaço restante */
+    border-bottom: 1px solid #000;
+    /* width: 25%; -> REMOVIDO PARA USAR FLEX-GROW */
+    display: inline-block; /* Mantém, mas o flex-grow domina a largura */
+    margin: 0 1px; /* Pequeno espaçamento entre as linhas da data */
+}
+
+
+/* --- MEDIA QUERY PARA IMPRESSÃO (O MAIS IMPORTANTE) --- */
+@media print {
+    body {
+        background-color: #fff;
+        margin: 0; /* Zera margens do corpo */
+        padding: 0; /* Zera padding do corpo */
+    }
+    .container {
+        box-shadow: none;
+        padding: 0; /* Zera padding do container principal */
+    }
+    button, .form-group, h1 {
+        display: none; /* Esconde elementos da interface */
+    }
+    .carnes-area {
+        width: 21cm; /* Largura total da folha A4 */
+        margin: 0; /* Zera margem da área de carnês */
+        padding: 0; /* Zera padding da área de carnês */
+        display: block; /* Volta para display block para controle de quebra de página */
+    }
+
+    .carne-par {
+        display: flex;
+        justify-content: flex-start; /* Alinha ao início */
+        width: 21cm; /* Ocupa a largura total da página */
+        height: auto; /* Altura flexível */
+        margin: 0; /* ZERA TODAS AS MARGENS ENTRE PARES */
+        padding: 0; /* ZERA TODOS OS PADDINGS DO PAR */
+        box-sizing: border-box;
+        page-break-inside: avoid; /* Evita quebra de página dentro de um par */
+        flex-wrap: nowrap; /* Garante que não quebre linha */
+    }
+
+    /* Estilo da aba de grampo para impressão */
+    .carne-aba-grampo {
+        width: 20px; /* Largura fixa */
+        height: auto; /* A altura será a mesma do carne-item */
+        border: 1px solid #000; /* Borda para corte */
+        box-sizing: border-box;
+        background-color: #fff; /* Fundo branco na impressão */
+        margin: 0; /* Sem margem entre a aba e o carnê */
+        flex-shrink: 0; /* Não encolhe */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.6em;
+        color: #000;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        padding: 0; /* Sem padding para o conteúdo da aba */
+    }
+
+    .carne-item {
+        /* Largura ajustada para caber junto com a aba de 20px */
+        /* (21cm - 2 * 20px) / 2 = (21cm - 40px) / 2 = 17cm / 2 = 8.5cm */
+        width: 10cm; /* CADA CARNÊ terá 8.5cm de largura. */
+        height: auto;
+        padding: 8px; /* Mantém o padding interno para o conteúdo */
+        margin: 0; /* ZERA TODAS AS MARGENS */
+        box-sizing: border-box;
+        font-size: 0.85em;
+        page-break-inside: avoid;
+
+        border: 1px solid #000; /* Borda completa para cada carnê */
+    }
+
+    /* Ajuste de altura para tentar caber 5 pares (10 carnês) na folha A4 */
+    /* A aba vai acompanhar a altura do carne-item */
+    .carne-item, .carne-aba-grampo { /* Aplica a mesma altura para o carnê e a aba */
+        min-height: 5.6cm; /* Mantenha o que você ajustou. Se precisar, ajuste novamente. */
+    }
+
+    /* Regra para quebrar a página a cada 5 PARES (10 carnês individuais) */
+    /* Isso significa que o primeiro par de cada grupo de 5 vai para uma nova página. */
+    .carne-par:nth-of-type(5n+1):not(:first-child) {
+         page-break-before: always;
+         margin-top: 0;
+    }
+
+    /* Estilo para a informação do PIX na impressão */
+    .carne-item .info-principal .info-pix {
+        font-size: 0.75em; /* Pode ser ainda menor na impressão para economizar espaço */
+        margin-top: 3px;
+    }
+
+    /* O ajuste de .linha-data para impressão */
+    .carne-item .campos-manual .linha-data {
+        flex-grow: 1;
+        border-bottom: 1px solid #000;
+        margin: 0 1px;
+    }
+}
