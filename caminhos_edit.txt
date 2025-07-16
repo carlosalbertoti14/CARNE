@@ -1,0 +1,32 @@
+PROGRAMA1path:
+"C:\Users\Caio-Win10\AppData\Local\Programs\Microsoft VS Code\Code.exe"
+
+arquivos1path:
+
+F:\Users\Caio89-W11\Documents\Caio89\SITES\SITES_CRIADOS\CARNE\index.html
+F:\Users\Caio89-W11\Documents\Caio89\SITES\SITES_CRIADOS\CARNE\estilos\estilos.css
+F:\Users\Caio89-W11\Documents\Caio89\SITES\SITES_CRIADOS\CARNE\estilos\style_apoio.css
+F:\Users\Caio89-W11\Documents\Caio89\SITES\SITES_CRIADOS\CARNE\script\geratriz.js
+
+
+
+
+PROGRAMA2path:
+"C:\Program Files\Google\Chrome\Application\chrome.exe"
+
+arquivos2path:
+F:\Users\Caio89-W11\Documents\Caio89\SITES\SITES_CRIADOS\CARNE\index.html
+
+PROGRAMA3path:
+
+
+arquivos3path:
+
+
+PROGRAMA4path:
+
+arquivos4path:
+
+PROGRAMA5path:
+
+arquivos5path:

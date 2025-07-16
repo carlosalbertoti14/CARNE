@@ -1,3 +1,4 @@
+/* /estilos/estilos.css */
 /* --- ESTILOS GERAIS --- */
 body {
     font-family: Arial, sans-serif;
@@ -99,8 +100,6 @@ button:hover {
     border: 1px solid #000;
     padding: 12px; /* Padding interno do conteúdo */
     box-sizing: border-box;
-    /* Ajuste na largura: Agora o carne-par precisa acomodar 2 carnês E 2 abas */
-    /* Na tela, vamos manter a largura um pouco flexível */
     width: calc(50% - 0px); /* (10px gap + 20px aba + 5px margem-aba)/2 */
     max-width: calc((25cm - 40px) / 2 - 5px); /* 19cm total - 2x 20px abas - espaçamento */
     min-height: 7.8cm; /* Altura um pouco maior para a aba na tela */
@@ -124,11 +123,9 @@ button:hover {
     margin-top: 3px;
     margin-bottom: 1px;
     text-align: center;
-    /* flex-grow: 1; */ /* Permite que o conteúdo principal ocupe espaço restante */
 }
 .carne-item .info-principal p {
     margin: 2px;
- 
 }
 .carne-item .info-principal strong {
     font-size: 1.05em;
@@ -143,7 +140,7 @@ button:hover {
 }
 
 .carne-item .campos-manual {
-    margin-top: 30px; /* Seu ajuste que ficou bom para o espaçamento */
+    margin-bottom: 20px; /* Seu ajuste que ficou bom para o espaçamento */
 }
 
 .carne-item .campos-manual p {
@@ -168,31 +165,74 @@ button:hover {
 .carne-item .campos-manual .linha-data {
     flex-grow: 1; /* Permite que cada um dos 3 spans de data ocupe 1/3 do espaço restante */
     border-bottom: 1px solid #000;
-    /* width: 25%; -> REMOVIDO PARA USAR FLEX-GROW */
     display: inline-block; /* Mantém, mas o flex-grow domina a largura */
     margin: 0 1px; /* Pequeno espaçamento entre as linhas da data */
 }
 
+/* --- NOVO: Estilos para a capa do carnê (Visualização em tela) --- */
+.capa-carne {
+    display: none; /* Por padrão, oculta na tela para não mostrar antes de gerar */
+    text-align: center;
+    padding: 2cm; /* Espaçamento interno */
+    margin: 1cm auto; /* Centraliza na tela */
+    background-color: #f9f9f9;
+    width: 20cm; /* Largura para a capa na tela */
+    max-width: 100%;
+    border: 1px solid #000; /* Borda para delimitar a aba */
+    box-sizing: border-box; /* Inclui padding e borda na largura/altura */
+    border-color: #000;
+}
+
+.capa-carne h2 {
+    font-size: 1.5em;
+    color: #0056b3;
+    margin-bottom: 15px;
+}
+
+.capa-carne p {
+    font-size: 1.5em;
+    margin: 5px 0;
+    color: #333;
+}
+
+.capa-carne .info-destaque {
+    font-weight: bold;
+    color: #000;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #2c3e50;
+    color: #ffffff;
+    border-radius: 0 0 8px 8px;
+}
 
 /* --- MEDIA QUERY PARA IMPRESSÃO (O MAIS IMPORTANTE) --- */
 @media print {
     body {
         background-color: #fff;
-        margin: 0; /* Zera margens do corpo */
-        padding: 0; /* Zera padding do corpo */
+        margin: 0;
+        padding: 0;
     }
     .container {
         box-shadow: none;
-        padding: 0; /* Zera padding do container principal */
+        padding: 0;
     }
-    button, .form-group, h1 {
-        display: none; /* Esconde elementos da interface */
+    
+    /* Esconde elementos da interface e footer */
+    button, .form-group, h1, footer { 
+        display: none; 
+
     }
+
     .carnes-area {
-        width: 21cm; /* Largura total da folha A4 */
-        margin: 0; /* Zera margem da área de carnês */
-        padding: 0; /* Zera padding da área de carnês */
-        display: block; /* Volta para display block para controle de quebra de página */
+        width: 18cm;
+        margin: 0;
+        padding: 0;
+        display: block;
+        page-break-before: auto; /* Garante que os carnês não iniciem uma nova página se a capa não for gerada */
     }
 
     .carne-par {
@@ -200,7 +240,7 @@ button:hover {
         justify-content: flex-start; /* Alinha ao início */
         width: 21cm; /* Ocupa a largura total da página */
         height: auto; /* Altura flexível */
-        margin: 0; /* ZERA TODAS AS MARGENS ENTRE PARES */
+        margin: 0; /* ZERA TODAS AS MARGENs ENTRE PARES */
         padding: 0; /* ZERA TODOS OS PADDINGS DO PAR */
         box-sizing: border-box;
         page-break-inside: avoid; /* Evita quebra de página dentro de um par */
@@ -227,35 +267,26 @@ button:hover {
     }
 
     .carne-item {
-        /* Largura ajustada para caber junto com a aba de 20px */
-        /* (21cm - 2 * 20px) / 2 = (21cm - 40px) / 2 = 17cm / 2 = 8.5cm */
-        width: 10cm; /* CADA CARNÊ terá 8.5cm de largura. */
+        width: 9.97cm; /* Largura para cada carnê individualmente (ajustado para caber 2 com 2 abas) */
         height: auto;
         padding: 8px; /* Mantém o padding interno para o conteúdo */
         margin: 0; /* ZERA TODAS AS MARGENS */
         box-sizing: border-box;
         font-size: 0.85em;
         page-break-inside: avoid;
-
         border: 1px solid #000; /* Borda completa para cada carnê */
-    }
-
-    /* Ajuste de altura para tentar caber 5 pares (10 carnês) na folha A4 */
-    /* A aba vai acompanhar a altura do carne-item */
-    .carne-item, .carne-aba-grampo { /* Aplica a mesma altura para o carnê e a aba */
-        min-height: 5.6cm; /* Mantenha o que você ajustou. Se precisar, ajuste novamente. */
+        min-height: 5.6cm; /* Mantém a altura mínima do carnê individual */
     }
 
     /* Regra para quebrar a página a cada 5 PARES (10 carnês individuais) */
-    /* Isso significa que o primeiro par de cada grupo de 5 vai para uma nova página. */
-    .carne-par:nth-of-type(5n+1):not(:first-child) {
-         page-break-before: always;
-         margin-top: 0;
+    .carne-par{
+       /*  page-break-before: always; */
+        margin-top: 0;
     }
 
     /* Estilo para a informação do PIX na impressão */
     .carne-item .info-principal .info-pix {
-        font-size: 0.75em; /* Pode ser ainda menor na impressão para economizar espaço */
+        font-size: 0.75em;
         margin-top: 3px;
     }
 
@@ -265,4 +296,50 @@ button:hover {
         border-bottom: 1px solid #000;
         margin: 0 1px;
     }
-}
+
+    /* ----------------------------------------------------- */
+    /* --- NOVO: Estilos para a capa na impressão (largura total da folha) --- */
+    .capa-carne-print {
+        display: flex; /* Transforma em flexbox para centralizar o conteúdo */
+        flex-direction: column; /* Conteúdo em coluna */
+        justify-content: center; /* Centraliza verticalmente */
+        align-items: center; /* Centraliza horizontalmente */
+        text-align: center; /* Alinha o texto ao centro */
+        
+        width: 20cm; /* Ocupa a largura total da página, como o .carne-par */
+        height: 7.8cm; /* Ocupa a altura total de uma folha A4 */
+        margin: 0;
+        padding: 2cm; /* Padding interno para o conteúdo da capa */
+        border: 1px solid #000; /* Borda para corte */
+        box-sizing: border-box;
+        /* border: 1px solid #000; */ /* Borda completa para cada carnê */
+        /* border: none; */ /* Remove a borda para não ter borda de carnê individual */
+        background-color: #fff; /* Garante fundo branco */
+        page-break-after: always; /* Força uma quebra de página APÓS a capa */
+    }
+
+    .capa-carne-print h2 {
+        font-size: 1.5em; /* Tamanho maior para o título da capa */
+        margin-bottom: 5px;
+        color: #000; /* Cor preta para impressão */
+    }
+    .capa-carne-print p {
+        font-size: 1.5em; /* Tamanho maior para os parágrafos da capa */
+        margin: 0px;
+        color: #000; /* Cor preta para impressão */
+    }
+
+    /* Garante que a capa original não apareça na impressão */
+    .capa-carne {
+        display: none; 
+    }
+
+    section#apoio{
+        display: none;
+    }
+
+
+
+
+
+} /* Fim da media query de impressão */

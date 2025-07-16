@@ -1,0 +1,586 @@
+Criei esse site e gostaria da sua ajuda para resolver algo.
+
+1 - (21) 9 8171-9914
+2 - 
+3 - 
+
+Obs.: Não coloque espaço antes dos código (para não dar erro de caracteres quando eu for colar).
+
+...................INICIO DO index.html......................
+...restante do código...
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Carnês Automático</title>
+    <link rel="stylesheet" href="estilos/estilos.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gerador de Carnês Simples</h1>
+
+        <div class="form-group">
+            <label for="valorTotal">Valor Total (R$):</label>
+            <input type="number" id="valorTotal" step="0.01" min="0.01" placeholder="Ex: 500.00" required>
+        </div>
+
+        <div class="form-group">
+            <label for="numParcelas">Número de Parcelas:</label>
+            <input type="number" id="numParcelas" min="1" value="1" required>
+        </div>
+
+        <div class="form-group">
+            <label for="dataVencimento">Data da Primeira Parcela:</label>
+            <input type="date" id="dataVencimento" required>
+        </div>
+
+        <div class="form-group">
+            <label for="nomeCliente">Nome do Cliente/Pagador:</label>
+            <input type="text" id="nomeCliente" placeholder="Ex: João da Silva" required>
+        </div>
+
+        <div class="form-group">
+            <label for="nomeRecebedor">Nome do Recebedor:</label>
+            <input type="text" id="nomeRecebedor" placeholder="Ex: Sua Empresa Ltda." required>
+        </div>
+
+        <div class="form-group">
+            <label for="assuntoCarne">Assunto/Referência do Carnê:</label>
+            <input type="text" id="assuntoCarne" placeholder="Ex: Reforma da Casa" required>
+        </div>
+
+        <div class="form-group">
+            <label for="infoPix">Informações para PIX (opcional):</label>
+            <input type="text" id="infoPix" placeholder="Ex: Chave PIX: 123.456.789-00 ou QR Code">
+        </div>
+
+        <button id="btnGerar">Gerar Carnês e Imprimir</button>
+
+        <div id="capaCarne" class="capa-carne">
+            </div>
+
+        <div class="carnes-area" id="carnesArea">
+            </div>
+    </div>
+
+    <script src="script/geratriz.js"></script>
+
+    <footer>
+        <div style="text-align: center;"><a style="
+            text-decoration: none;
+            background-color: green;
+            color: white; 
+            font-weight: bolder;
+            text-align: center; 
+            padding: 10px;
+            border-radius: 10px;
+            " href="https://payment-calp.netlify.app/" target="_blank" >APOIAR COM DONATIVO</a> 
+        </div>
+    </footer>
+</body>
+</html>
+
+...restante do código...
+...................FIM DO index.html......................
+
+
+
+...................INICIO DO style.css......................
+...restante do código...
+
+/* /estilos/estilos.css */
+/* --- ESTILOS GERAIS --- */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #0056b3;
+    margin-bottom: 30px;
+}
+
+/* --- ESTILOS DO FORMULÁRIO --- */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* --- ESTILOS DA ÁREA DE CARNÊS (VISUALIZAÇÃO EM TELA) --- */
+.carnes-area {
+    margin-top: 40px;
+    border-top: 1px dashed #ccc;
+    padding-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0px; /* Mantém um pequeno espaço na tela para visualização */
+}
+
+.carne-par {
+    display: flex; /* Mantém como flexbox */
+    justify-content: space-between; /* Espaço entre os dois carnês (pagador/recebedor) */
+    width: 100%; /* Ocupa toda a largura disponível na tela */
+    margin-bottom: 0px; /* Espaço entre os pares na tela */
+    flex-wrap: nowrap; /* Garante que os itens não quebrem linha inesperadamente */
+}
+
+/* Estilo para a aba de grampo */
+.carne-aba-grampo {
+    width: 20px; /* Largura fixa da aba */
+    border: 1px solid #000; /* Borda para delimitar a aba */
+    box-sizing: border-box; /* Inclui padding e borda na largura/altura */
+    background-color: #f0f0f0; /* Um tom diferente para destacar a aba na tela */
+    margin-right: 5px; /* Espaço entre a aba e o carnê na tela */
+    flex-shrink: 0; /* Impede que a aba encolha */
+    display: flex; /* Para centralizar texto ou ícone se quiser no futuro */
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7em;
+    color: #666;
+    writing-mode: vertical-rl; /* Para texto vertical, se necessário */
+    text-orientation: mixed;
+    padding: 2px;
+}
+
+.carne-item {
+    border: 1px solid #000;
+    padding: 12px; /* Padding interno do conteúdo */
+    box-sizing: border-box;
+    width: calc(50% - 0px); /* (10px gap + 20px aba + 5px margem-aba)/2 */
+    max-width: calc((25cm - 40px) / 2 - 5px); /* 19cm total - 2x 20px abas - espaçamento */
+    min-height: 7.8cm; /* Altura um pouco maior para a aba na tela */
+    page-break-inside: avoid;
+    background-color: #fff;
+    font-size: 0.85em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.carne-item h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 3px;
+    font-size: 1.05em;
+    font-weight: bold;
+}
+
+.carne-item .info-principal {
+    margin-top: 3px;
+    margin-bottom: 1px;
+    text-align: center;
+}
+.carne-item .info-principal p {
+    margin: 2px;
+}
+.carne-item .info-principal strong {
+    font-size: 1.05em;
+}
+
+/* Estilo para a informação do PIX */
+.carne-item .info-principal .info-pix {
+    font-size: 0.8em; /* Fonte um pouco menor para o PIX */
+    color: #555;
+    margin-top: 5px; /* Espaço acima da linha do PIX */
+    word-wrap: break-word; /* Garante que o texto longo quebre a linha */
+}
+
+.carne-item .campos-manual {
+    margin-bottom: 20px; /* Seu ajuste que ficou bom para o espaçamento */
+}
+
+.carne-item .campos-manual p {
+    display: flex;
+    align-items: baseline;
+    margin-top: 30px; 
+    margin-bottom: 7px; /* Espaçamento menor entre os campos */
+}
+
+.carne-item .campos-manual span {
+    flex-shrink: 0;
+    margin-right: 3px;
+    font-weight: bold;
+}
+
+.carne-item .campos-manual .linha {
+    flex-grow: 1; /* Permite que ocupe todo o espaço restante */
+    border-bottom: 1px solid #000;
+    margin-left: 3px;
+}
+
+.carne-item .campos-manual .linha-data {
+    flex-grow: 1; /* Permite que cada um dos 3 spans de data ocupe 1/3 do espaço restante */
+    border-bottom: 1px solid #000;
+    display: inline-block; /* Mantém, mas o flex-grow domina a largura */
+    margin: 0 1px; /* Pequeno espaçamento entre as linhas da data */
+}
+
+/* --- NOVO: Estilos para a capa do carnê (Visualização em tela) --- */
+.capa-carne {
+    display: none; /* Por padrão, oculta na tela para não mostrar antes de gerar */
+    text-align: center;
+    padding: 2cm; /* Espaçamento interno */
+    margin: 1cm auto; /* Centraliza na tela */
+    background-color: #f9f9f9;
+    width: 20cm; /* Largura para a capa na tela */
+    max-width: 100%;
+    border: 1px solid #000; /* Borda para delimitar a aba */
+    box-sizing: border-box; /* Inclui padding e borda na largura/altura */
+    border-color: #000;
+}
+
+.capa-carne h2 {
+    font-size: 1.5em;
+    color: #0056b3;
+    margin-bottom: 15px;
+}
+
+.capa-carne p {
+    font-size: 1.5em;
+    margin: 5px 0;
+    color: #333;
+}
+
+.capa-carne .info-destaque {
+    font-weight: bold;
+    color: #000;
+}
+
+
+/* --- MEDIA QUERY PARA IMPRESSÃO (O MAIS IMPORTANTE) --- */
+@media print {
+    body {
+        background-color: #fff;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        box-shadow: none;
+        padding: 0;
+    }
+    
+    /* Esconde elementos da interface e footer */
+    button, .form-group, h1, footer { 
+        display: none; 
+    }
+
+    .carnes-area {
+        width: 18cm;
+        margin: 0;
+        padding: 0;
+        display: block;
+        page-break-before: auto; /* Garante que os carnês não iniciem uma nova página se a capa não for gerada */
+    }
+
+    .carne-par {
+        display: flex;
+        justify-content: flex-start; /* Alinha ao início */
+        width: 21cm; /* Ocupa a largura total da página */
+        height: auto; /* Altura flexível */
+        margin: 0; /* ZERA TODAS AS MARGENs ENTRE PARES */
+        padding: 0; /* ZERA TODOS OS PADDINGS DO PAR */
+        box-sizing: border-box;
+        page-break-inside: avoid; /* Evita quebra de página dentro de um par */
+        flex-wrap: nowrap; /* Garante que não quebre linha */
+    }
+
+    /* Estilo da aba de grampo para impressão */
+    .carne-aba-grampo {
+        width: 20px; /* Largura fixa */
+        height: auto; /* A altura será a mesma do carne-item */
+        border: 1px solid #000; /* Borda para corte */
+        box-sizing: border-box;
+        background-color: #fff; /* Fundo branco na impressão */
+        margin: 0; /* Sem margem entre a aba e o carnê */
+        flex-shrink: 0; /* Não encolhe */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.6em;
+        color: #000;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        padding: 0; /* Sem padding para o conteúdo da aba */
+    }
+
+    .carne-item {
+        width: 9.97cm; /* Largura para cada carnê individualmente (ajustado para caber 2 com 2 abas) */
+        height: auto;
+        padding: 8px; /* Mantém o padding interno para o conteúdo */
+        margin: 0; /* ZERA TODAS AS MARGENS */
+        box-sizing: border-box;
+        font-size: 0.85em;
+        page-break-inside: avoid;
+        border: 1px solid #000; /* Borda completa para cada carnê */
+        min-height: 5.6cm; /* Mantém a altura mínima do carnê individual */
+    }
+
+    /* Regra para quebrar a página a cada 5 PARES (10 carnês individuais) */
+    .carne-par{
+       /*  page-break-before: always; */
+        margin-top: 0;
+    }
+
+    /* Estilo para a informação do PIX na impressão */
+    .carne-item .info-principal .info-pix {
+        font-size: 0.75em;
+        margin-top: 3px;
+    }
+
+    /* O ajuste de .linha-data para impressão */
+    .carne-item .campos-manual .linha-data {
+        flex-grow: 1;
+        border-bottom: 1px solid #000;
+        margin: 0 1px;
+    }
+
+    /* ----------------------------------------------------- */
+    /* --- NOVO: Estilos para a capa na impressão (largura total da folha) --- */
+    .capa-carne-print {
+        display: flex; /* Transforma em flexbox para centralizar o conteúdo */
+        flex-direction: column; /* Conteúdo em coluna */
+        justify-content: center; /* Centraliza verticalmente */
+        align-items: center; /* Centraliza horizontalmente */
+        text-align: center; /* Alinha o texto ao centro */
+        
+        width: 20cm; /* Ocupa a largura total da página, como o .carne-par */
+        height: 7.8cm; /* Ocupa a altura total de uma folha A4 */
+        margin: 0;
+        padding: 2cm; /* Padding interno para o conteúdo da capa */
+        border: 1px solid #000; /* Borda para corte */
+        box-sizing: border-box;
+        /* border: 1px solid #000; */ /* Borda completa para cada carnê */
+        /* border: none; */ /* Remove a borda para não ter borda de carnê individual */
+        background-color: #fff; /* Garante fundo branco */
+        page-break-after: always; /* Força uma quebra de página APÓS a capa */
+    }
+
+    .capa-carne-print h2 {
+        font-size: 1.5em; /* Tamanho maior para o título da capa */
+        margin-bottom: 5px;
+        color: #000; /* Cor preta para impressão */
+    }
+    .capa-carne-print p {
+        font-size: 1.5em; /* Tamanho maior para os parágrafos da capa */
+        margin: 0px;
+        color: #000; /* Cor preta para impressão */
+    }
+
+    /* Garante que a capa original não apareça na impressão */
+    .capa-carne {
+        display: none; 
+    }
+} /* Fim da media query de impressão */
+
+...restante do código...
+...................FIM DO style.css......................
+
+
+...................INICIO DO script.js......................
+...restante do código...
+
+/* script/geratriz.js */
+
+/* script/geratriz.js */
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Referência aos elementos do DOM
+    const valorTotalInput = document.getElementById('valorTotal');
+    const numParcelasInput = document.getElementById('numParcelas');
+    const dataVencimentoInput = document.getElementById('dataVencimento');
+    const nomeClienteInput = document.getElementById('nomeCliente');
+    const nomeRecebedorInput = document.getElementById('nomeRecebedor');
+    const assuntoCarneInput = document.getElementById('assuntoCarne');
+    const infoPixInput = document.getElementById('infoPix');
+    const btnGerar = document.getElementById('btnGerar');
+    const carnesArea = document.getElementById('carnesArea');
+    const capaCarneDiv = document.getElementById('capaCarne'); // NOVO: Referência à div da capa
+
+    // Define a data atual como padrão no campo de data de vencimento
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    dataVencimentoInput.value = `${year}-${month}-${day}`;
+    dataVencimentoInput.min = `${year}-${month}-${day}`;
+
+    // Adiciona o evento de clique ao botão
+    btnGerar.addEventListener('click', gerarCarnes);
+
+    function gerarCarnes() {
+        const valorTotalStr = valorTotalInput.value;
+        const numParcelasStr = numParcelasInput.value;
+        const dataVencimentoOriginalStr = dataVencimentoInput.value;
+        const nomeCliente = nomeClienteInput.value;
+        const nomeRecebedor = nomeRecebedorInput.value;
+        const assuntoCarne = assuntoCarneInput.value;
+        const infoPix = infoPixInput.value.trim();
+
+        // Validação básica dos campos REQUERIDOS
+        if (!valorTotalStr || !numParcelasStr || !dataVencimentoOriginalStr || !nomeCliente || !nomeRecebedor || !assuntoCarne) {
+            alert('Por favor, preencha todos os campos obrigatórios!');
+            return;
+        }
+
+        const valorTotal = parseFloat(valorTotalStr);
+        const numParcelas = parseInt(numParcelasStr);
+
+        if (isNaN(valorTotal) || isNaN(numParcelas) || valorTotal <= 0 || numParcelas <= 0) {
+            alert('Por favor, insira valores válidos para o Valor Total e Número de Parcelas.');
+            return;
+        }
+
+        const valorParcela = valorTotal / numParcelas;
+        carnesArea.innerHTML = ''; // Limpa a área de carnês
+
+        // --- INÍCIO DA CORREÇÃO PARA PONTO DE MILHAR (MANTIDA) ---
+        // Cria um formatador para moeda brasileira (BRL)
+        const formatter = new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+
+        // Formata o valor total e o valor da parcela usando o formatador
+        const valorTotalFormatado = formatter.format(valorTotal);
+        const valorParcelaFormatado = formatter.format(valorParcela);
+        // --- FIM DA CORREÇÃO PARA PONTO DE MILHAR ---
+        
+        // Preenche o HTML da capa e adiciona a classe para impressão
+        const capaHtmlContent = `
+            <h2>COMPROVANTE DE PAGAMENTO</h2>
+            <p><span class="info-destaque"></span> ${assuntoCarne}</p>
+            <p><span class="info-destaque">Pagador:</span> ${nomeCliente}</p>
+            <p><span class="info-destaque">Recebedor:</span> ${nomeRecebedor}</p>
+            <p>Carnê dividido em <span class="info-destaque">${numParcelas}</span> parcelas de <span class="info-destaque">${valorParcelaFormatado}</span>.</p>
+            <p><span class="info-destaque">Valor Total:</span> ${valorTotalFormatado}</p>
+            <p><span class="info-destaque">Primeiro Vencimento:</span> ${new Date(dataVencimentoOriginalStr + 'T12:00:00').toLocaleDateString('pt-BR')}</p>
+        `;
+        
+        // Cria um elemento 'div' para a capa que será impressa.
+        const capaPrintDiv = document.createElement('div');
+        capaPrintDiv.className = 'capa-carne-print'; // Aplica a nova classe CSS
+        capaPrintDiv.innerHTML = capaHtmlContent;
+        carnesArea.appendChild(capaPrintDiv); // Adiciona a capa na área de carnês
+
+        let allCarnesHtml = ''; // String para acumular todo o HTML dos carnês
+
+        const dataInicialVencimento = new Date(dataVencimentoOriginalStr + 'T12:00:00');
+        const diaOriginal = dataInicialVencimento.getDate();
+
+        // --- RESTAURAÇÃO DA LÓGICA ORIGINAL DE CRIAÇÃO DE CARNÊS ---
+        for (let i = 1; i <= numParcelas; i++) {
+            let dataAtualParcela = new Date(dataInicialVencimento);
+            dataAtualParcela.setMonth(dataInicialVencimento.getMonth() + (i - 1));
+
+            const ultimoDiaDoMes = new Date(dataAtualParcela.getFullYear(), dataAtualParcela.getMonth() + 1, 0).getDate();
+            if (diaOriginal > ultimoDiaDoMes) {
+                dataAtualParcela.setDate(ultimoDiaDoMes);
+            } else {
+                dataAtualParcela.setDate(diaOriginal);
+            }
+            
+            const diaFormatado = String(dataAtualParcela.getDate()).padStart(2, '0');
+            // 'mesPorExtenso' não está sendo usado, mas mantido.
+            const mesPorExtenso = dataAtualParcela.toLocaleString('pt-BR', { month: 'long' }); 
+            const anoFormatado = dataAtualParcela.getFullYear();
+            
+            const dataVencimentoFormatada = `${diaFormatado}/${String(dataAtualParcela.getMonth() + 1).padStart(2, '0')}/${anoFormatado}`;
+
+            const referenciaDetalhada = `Parcela ${i}/${numParcelas}`;
+            const pixHtml = infoPix ? `<p class="info-pix">Pagamento via PIX: ${infoPix}</p>` : '';
+
+            // O carneIndividualHtml agora usa o valorParcelaFormatado
+            const carneIndividualHtml = `
+                <div class="carne-item">
+                    <h3>COMPROVANTE DE PAGAMENTO</h3>
+                    <div class="info-principal">
+                        <p>Ref.: ${assuntoCarne}</p>
+                        <p>Valor da parcela ${valorParcelaFormatado}</p>
+                        <p>${referenciaDetalhada}</p>
+                        <p>Vencimento: ${dataVencimentoFormatada}</p>
+                        ${pixHtml}
+                    </div>
+
+                    <div class="campos-manual">
+                        <p><span>VALOR:</span> R$ <span class="linha"></span></p>
+                        <p><span>DATA:</span> <span class="linha-data"></span> / <span class="linha-data"></span> / <span class="linha-data"></span></p>
+                        <p><span>ASS.:</span> <span class="linha"></span></p>
+                    </div>
+                </div>
+            `;
+            
+            const carneAbaGrampoHtml = `<div class="carne-aba-grampo"></div>`;
+
+            // Esta é a estrutura original que você estava usando para criar um "par":
+            // Um carne-par contendo uma aba e duas cópias do carneIndividualHtml.
+            // Pelo seu feedback, essa era a lógica esperada pelo seu CSS.
+            const carneParHtml = `
+                <div class="carne-par">
+                    ${carneAbaGrampoHtml}
+                    ${carneIndividualHtml}
+                    ${carneIndividualHtml} 
+                </div>
+            `;
+            allCarnesHtml += carneParHtml;
+        }
+        // --- FIM DA RESTAURAÇÃO DA LÓGICA ORIGINAL ---
+
+        carnesArea.innerHTML += allCarnesHtml; // Adiciona os carnês após a capa
+        window.print();
+    }
+});
+...restante do código...
+...................FIM DO script.js......................
+
+LISTA DE ARQUIVOS midia/:
+
+
+Fim dos códigos.

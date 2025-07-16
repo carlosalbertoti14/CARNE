@@ -1,10 +1,37 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Carnês Automático</title>
-    <link rel="stylesheet" href="estilos/estilos.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerador de Carnês Online Grátis | Crie Carnês de Pagamento Facilmente</title>
+
+    <meta name="description" content="Gere carnês de pagamento de forma rápida e fácil. Crie carnês para mensalidades, doações ou vendas, com parcelas e vencimentos automáticos." />
+    <meta name="keywords" content="gerador de carnê, carnê online, carnê de pagamento, boleto, parcelamento, vencimento, gratuito, mensalidade, doação" />
+    <meta name="author" content="Carlos Alberto Leão Pinheiro" />
+    <meta name="email" content="suportecalp@gmail.com" />
+    <link rel="canonical" href="https://carneonline.netlify.app/" />
+    <link rel="shortcut icon" href="midia/favicon.ico" type="image/x-icon" />
+
+    <link rel="stylesheet" href="estilos/style_apoio.css" />
+    <link rel="stylesheet" href="estilos/estilos.css" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+
+    <meta property="og:url" content="https://carneonline.netlify.app/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Gerador de Carnês Online Grátis: Simples e Rápido!" />
+    <meta property="og:description" content="Crie seus carnês de pagamento online de forma descomplicada. Gere parcelas, datas de vencimento e imprima com facilidade." />
+    <meta property="og:image" content="https://carneonline.netlify.app/midia/banner_carneonline.png" /> <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Banner do Gerador de Carnês Online Grátis" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@SeuTwitterAqui" /> <meta name="twitter:title" content="Gerador de Carnês Online Grátis: Simples e Rápido!" />
+    <meta name="twitter:description" content="Crie seus carnês de pagamento online de forma descomplicada. Gere parcelas, datas de vencimento e imprima com facilidade." />
+    <meta name="twitter:image" content="https://carneonline.netlify.app/midia/banner_carneonline.png" />
+
+    <meta name="google-site-verification" content="SEU_CODIGO_DE_VERIFICACAO_AQUI" />
+
 </head>
 <body>
     <div class="container">
@@ -47,10 +74,70 @@
 
         <button id="btnGerar">Gerar Carnês e Imprimir</button>
 
+        <div id="capaCarne" class="capa-carne">
+            </div>
+
         <div class="carnes-area" id="carnesArea">
             </div>
     </div>
 
     <script src="script/geratriz.js"></script>
+    <script src="script/compartilhe.js"></script>
+
+            <section id="apoio">
+            <div>
+                <a
+                    href="mailto:suportecalp@gmail.com?subject=Contato%20Sobre%20ESTUDO%20DE%20PROVAS"
+                >
+                    <img
+                        src="midia/faleconosco.png"
+                        alt="Fale Conosco"
+                        class="fale-conosco-icon"
+                    />
+                    FALE CONOSCO (Link Direto)
+                </a>
+            </div>
+
+            <p>COMPARTILHAR CONHECIMENTO</p>
+
+            <div class="share-buttons">
+                <a href="#" id="shareFacebook">
+                    <img
+                        src="midia/comp_facebook.png"
+                        alt="Compartilhar no Facebook"
+                    />
+                </a>
+                <a href="#" id="shareWhatsapp">
+                    <img
+                        src="midia/comp_whatsapp.png"
+                        alt="Compartilhar no WhatsApp"
+                    />
+                </a>
+            </div>
+
+            <div class="copy-link-button">
+                <button id="copyLinkButton">COPIAR LINK</button>
+            </div>
+
+            <div>
+                <a href="https://payment-calp.netlify.app/" target="_blank">APOIAR COM DONATIVO</a>
+            </div>
+        </section>
+
+    <footer>
+<!--         <div style="text-align: center;"><a style="
+            text-decoration: none;
+            background-color: green;
+            color: white; 
+            font-weight: bolder;
+            text-align: center; 
+            padding: 10px;
+            border-radius: 10px;
+            " href="https://payment-calp.netlify.app/" target="_blank" >APOIAR COM DONATIVO</a> 
+        </div> -->
+            <p>
+                &copy; 2025 Site Gerador de Carnês. Todos os direitos reservados.
+            </p>
+    </footer>
 </body>
 </html>

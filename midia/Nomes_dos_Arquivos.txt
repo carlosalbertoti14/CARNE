@@ -1,0 +1,6 @@
+banner_CARNE.jpg
+comp_facebook.png
+comp_intagram.jpg
+comp_whatsapp.png
+faleconosco.png
+favicon.ico
