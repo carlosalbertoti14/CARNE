@@ -42,18 +42,9 @@
             <input type="number" id="valorTotal" step="0.01" min="0.01" placeholder="Ex: 500.00" required>
         </div>
 
-        <div id="metodo">
-
-                <div class="form-group">  <!-- nesse método o valor total será dividido pelo numero de parcelas escolhida -->
-                    <label for="numParcelas">PARCELAS POR MÊS:</label>
-                    <input type="number" id="numParcelas" min="1" value="1" required>
-                </div>
-                
-                <div class="form-group"> <!-- nesse método o usuario escolhera quando pode pagar por mês, e os meses serão disponibilizados automaticamente de acordo com o valor (o restante será pago em um mês a mais, caso não seja exato) -->
-                    <label for="valorMES">VALOR POR MÊS</label>
-                    <input type="number" id="valorMES" min="1" value="1" required>
-                </div>
-
+        <div class="form-group">
+            <label for="numParcelas">Número de Parcelas:</label>
+            <input type="number" id="numParcelas" min="1" value="1" required>
         </div>
 
         <div class="form-group">

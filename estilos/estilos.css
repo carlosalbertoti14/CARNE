@@ -209,6 +209,34 @@ footer {
     border-radius: 0 0 8px 8px;
 }
 
+/* Ajuste para o Carlos colocar os campos lado a lado */
+#metodo {
+    display: flex;
+    gap: 15px; /* Espaçamento entre os dois blocos */
+    width: 100%;
+}
+
+#metodo .form-group {
+    flex: 1; /* Faz os dois campos dividirem o espaço igualmente */
+}
+
+/* Garante que o input dentro do flex não quebre o cálculo de calc(100% - 22px) */
+#metodo .form-group input {
+    width: calc(100% - 22px); 
+}
+
+/* Responsividade: Se a tela for pequena, eles voltam a ficar um embaixo do outro */
+@media (max-width: 300px) {
+    #metodo {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+/* fim lado a lado */
+
+
+
 /* --- MEDIA QUERY PARA IMPRESSÃO (O MAIS IMPORTANTE) --- */
 @media print {
     body {
@@ -297,48 +325,87 @@ footer {
         margin: 0 1px;
     }
 
-    /* ----------------------------------------------------- */
-    /* --- NOVO: Estilos para a capa na impressão (largura total da folha) --- */
+/* ----------------------------------------------------- */
+    /* --- NOVO: Estilos para a CAPA e ASSINATURAS na mesma folha --- */
+
+    /* Bloco da Capa */
     .capa-carne-print {
-        display: flex; /* Transforma em flexbox para centralizar o conteúdo */
-        flex-direction: column; /* Conteúdo em coluna */
-        justify-content: center; /* Centraliza verticalmente */
-        align-items: center; /* Centraliza horizontalmente */
-        text-align: center; /* Alinha o texto ao centro */
+        display: flex; 
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center; 
+        text-align: center; 
         
-        width: 20cm; /* Ocupa a largura total da página, como o .carne-par */
-        height: 7.8cm; /* Ocupa a altura total de uma folha A4 */
+        width: 21cm; /* Ajustado para 21cm conforme solicitado */
+        height: 7.8cm; 
         margin: 0;
-        padding: 2cm; /* Padding interno para o conteúdo da capa */
-        border: 1px solid #000; /* Borda para corte */
+        padding: 1cm; /* Padding reduzido para garantir espaço */
+        border: 1px solid #000; 
         box-sizing: border-box;
-        /* border: 1px solid #000; */ /* Borda completa para cada carnê */
-        /* border: none; */ /* Remove a borda para não ter borda de carnê individual */
-        background-color: #fff; /* Garante fundo branco */
-        page-break-after: always; /* Força uma quebra de página APÓS a capa */
+        background-color: #fff; 
+        /* page-break-after REMOVIDO daqui para não pular folha */
     }
 
     .capa-carne-print h2 {
-        font-size: 1.5em; /* Tamanho maior para o título da capa */
+        font-size: 1.5em; 
         margin-bottom: 5px;
-        color: #000; /* Cor preta para impressão */
+        color: #000; 
     }
+    
     .capa-carne-print p {
-        font-size: 1.5em; /* Tamanho maior para os parágrafos da capa */
-        margin: 0px;
-        color: #000; /* Cor preta para impressão */
+        font-size: 1.2em; /* Reduzi levemente para caber melhor no conjunto */
+        margin: 2px 0;
+        color: #000; 
     }
 
-    /* Garante que a capa original não apareça na impressão */
-    .capa-carne {
-        display: none; 
+    /* Bloco de Assinaturas (Reconhecimento de Firma) */
+    .pagina-assinaturas {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around; 
+        align-items: center;
+        
+        width: 21cm; 
+        height: 7.8cm; 
+        margin: 0; /* Colado na capa acima */
+        border: 1px solid #000;
+        box-sizing: border-box;
+        padding: 1cm;
+        background-color: #fff;
+        page-break-after: always; /* ESTE mantém a quebra para a próxima folha */
     }
 
-    section#apoio{
-        display: none;
+    .campo-assinatura {
+        width: 80%;
+        text-align: center;
+        margin: 10px 0;
     }
 
+    .linha-assinatura {
+        border-bottom: 1px solid #000;
+        width: 100%;
+        display: block;
+        margin-bottom: 5px;
+    }
 
+    .legenda-assinatura {
+        font-size: 0.9em;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    /* --- LIMPEZA DE ELEMENTOS NA IMPRESSÃO --- */
+    .capa-carne, 
+    section#apoio,
+    header,
+    footer,
+    .container > h1,
+    .form-group,
+    button {
+        display: none !important; 
+    }
+
+/* fim pagina final */
 
 
 
