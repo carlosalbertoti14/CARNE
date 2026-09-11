@@ -163,3 +163,27 @@ document.addEventListener('DOMContentLoaded', () => {
         window.print();
     }
 });
+
+// Controle de Abertura/Fechamento do Modal de Instruções
+const btnInstrucao = document.getElementById('btnInstrucao');
+const modalInstrucao = document.getElementById('modalInstrucao');
+const fecharModal = document.getElementById('fecharModal');
+
+if (btnInstrucao && modalInstrucao && fecharModal) {
+    // Abrir o modal ao clicar no botão INSTRUÇÃO
+    btnInstrucao.addEventListener('click', () => {
+        modalInstrucao.style.display = 'block';
+    });
+
+    // Fechar ao clicar no botão "X"
+    fecharModal.addEventListener('click', () => {
+        modalInstrucao.style.display = 'none';
+    });
+
+    // Fechar se o usuário clicar fora do conteúdo do modal
+    window.addEventListener('click', (event) => {
+        if (event.target === modalInstrucao) {
+            modalInstrucao.style.display = 'none';
+        }
+    });
+}

@@ -410,3 +410,91 @@ footer {
 
 
 } /* Fim da media query de impressão */
+
+/* --- ESTILOS DO BOTÃO E MODAL DE INSTRUÇÃO --- */
+.instrucoes-container {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.btn-instrucao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: auto; /* Não ocupa 100% da largura */
+    background-color: #17a2b8;
+    color: white;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    margin-top: 0;
+}
+
+.btn-instrucao:hover {
+    background-color: #138496;
+}
+
+/* Modal Estilo */
+.modal-instrucao {
+    display: none; /* Oculto por padrão */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-conteudo {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 25px;
+    border-radius: 8px;
+    max-width: 700px;
+    width: 90%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.fechar-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.fechar-modal:hover,
+.fechar-modal:focus {
+    color: #000;
+}
+
+.texto-instrucoes {
+    text-align: left;
+    line-height: 1.6;
+    margin-top: 15px;
+    color: #444;
+}
+
+.texto-instrucoes p {
+    margin-bottom: 12px;
+}
+
+.aviso-juridico {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 10px;
+    border-left: 4px solid #ffeeba;
+    border-radius: 4px;
+}
+
+
+
+/* --- FIM ESTILOS DO BOTÃO E MODAL DE INSTRUÇÃO --- */

@@ -37,6 +37,47 @@
     <div class="container">
         <h1>Gerador de Carnês Simples</h1>
 
+        <!-- INÍCIO DO BOTÃO E MODAL DE INSTRUÇÕES -->
+    <div class="instrucoes-container">
+        <button type="button" id="btnInstrucao" class="btn-instrucao">
+            <i class="fas fa-info-circle"></i> INSTRUÇÃO DE USO
+        </button>
+    </div>
+
+    <!-- Modal de Instrução (inicia oculto) -->
+    <div id="modalInstrucao" class="modal-instrucao">
+        <div class="modal-conteudo">
+            <span class="fechar-modal" id="fecharModal">&times;</span>
+            <h2>INSTRUÇÃO DE USO</h2>
+            <div class="texto-instrucoes">
+                <p><strong>VALOR TOTAL:</strong> Aqui você colocará o valor integral do financiamento.</p>
+                
+                <p><strong>PARCELAS POR MÊS / VALOR POR MÊS:</strong> Nesse campo você irá escolher entre as duas formas de cálculos do financiamento (você só poderá escolher uma). Se for "Parcelas por Mês", você digitará a quantidade de meses que pretende dividir o valor integral, então o programa irá dividir o valor integral pela quantidade de meses escolhida ao gerar o carnê. Caso escolha "Valor por Mês", você decide quanto pode pagar por mês e, ao gerar o carnê, o programa calculará a quantidade de meses necessários para quitar.</p>
+                
+                <p><strong>DATA DA PRIMEIRA PARCELA:</strong> Aqui você colocará a data do primeiro pagamento. Caso já tenha pago algumas parcelas, coloque a data passada em que o pagamento foi feito, escolhendo o dia correspondente. Os boletos passados também serão gerados (você pode pedir para o pagador assiná-los ou descartá-los se desejar).</p>
+                
+                <p><strong>NOME DO CLIENTE/PAGADOR:</strong> Nome de quem irá pagar (ou seu nome, caso você seja o pagador).</p>
+                
+                <p><strong>NOME DO RECEBEDOR:</strong> Nome de quem irá receber o dinheiro.</p>
+                
+                <p><strong>ASSUNTO/REFERÊNCIA DO CARNÊ:</strong> Do que se trata este financiamento (aluguel, carro, empréstimo, Televisão 4k, etc.).</p>
+                
+                <p><strong>INFORMAÇÕES PARA PIX:</strong> Campo opcional para fornecer mais uma opção de pagamento. O comprovante do PIX serve como comprovante para o carnê.</p>
+                
+                <p><strong>GERAR CARNÊS E IMPRIMIR:</strong><br>
+                Ao clicar no botão, os carnês serão gerados para impressão em folha A4. Aconselho salvar como PDF. Revise bem as informações antes. Ao imprimir, recorte e coloque na ordem: capa, carnês em ordem de mês e página de assinatura.</p>
+                
+                <p><strong>COMO FUNCIONA:</strong> São gerados 2 comprovantes por mês. Um é assinado e datado pelo pagador e outro pelo recebedor, Um deverá destacar e ficar com a assinatura do outro, garantindo controle para ambos.</p>
+                
+                <p class="aviso-juridico"><strong>Atenção:</strong> Este carnê não tem valor jurídico por padrão, servindo para controle. Para ter valor jurídico, ambos devem assinar e reconhecer firma em cartório.</p>
+            </div>
+        </div>
+    </div>
+    <!-- FIM DO BOTÃO E MODAL DE INSTRUÇÕES -->
+
+
+
+
         <div class="form-group">
             <label for="valorTotal">Valor Total (R$):</label>
             <input type="number" id="valorTotal" step="0.01" min="0.01" placeholder="Ex: 500.00" required>
